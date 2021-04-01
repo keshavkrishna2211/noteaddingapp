@@ -40,7 +40,7 @@ function showNotes()
       <button id="${index}" onclick="deleteNote(this.id)" class="btn btn-primary">Delete Note</button>
     </div>
   </div>`;
-    
+
   });
   let notesElm=document.getElementById('notes');
   if(notesObj.length!=0)
@@ -55,7 +55,7 @@ function showNotes()
 //function to delete note
 function deleteNote(index)
 {
-  console.log(" deleting note",index);
+  
   let notes=localStorage.getItem("notes");
   if(notes==null)
   {
@@ -68,3 +68,22 @@ function deleteNote(index)
   localStorage.setItem("notes",JSON.stringify(notesObj));
   showNotes();
 }
+let search= document.getElementById("searchTxt");
+search.addEventListener("input",function()
+{ let inputVal=search.value.toLowerCase();
+ 
+ let noteCards=document.getElementsByClassName("noteCard");
+ 
+ Array.from(noteCards).forEach(function(element){
+   let cardTxt=element.getElementsByTagName("p")[0].innerText;
+   if(cardTxt.includes(inputVal))
+   {
+     element.style.display="block";
+   }
+   else
+   {
+    element.style.display="none";
+   }
+
+ });
+})
